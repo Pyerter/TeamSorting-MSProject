@@ -8,7 +8,6 @@ import pyerter.squirrel.tpp.core.TeamSorterResult;
 import pyerter.squirrel.tpp.core.TeamSorterSolver;
 import pyerter.squirrel.tpp.core.TeamSortingInput;
 import pyerter.squirrel.tpp.io.CsvReader;
-import pyerter.squirrel.tpp.friendship.TeamSorterFriendshipSolverOld;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;

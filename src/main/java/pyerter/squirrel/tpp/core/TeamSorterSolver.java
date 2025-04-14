@@ -8,7 +8,6 @@ import com.google.ortools.linearsolver.MPSolver;
 import com.google.ortools.linearsolver.MPVariable;
 import pyerter.squirrel.tpp.TeamSortingLogger;
 import pyerter.squirrel.tpp.friendship.Friendship;
-import pyerter.squirrel.tpp.friendship.TeamSorterFriendshipRounding;
 import pyerter.squirrel.tpp.friendship.TeamSorterFriendshipRoundingConstrained;
 
 import java.util.Arrays;

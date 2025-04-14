@@ -13,6 +13,8 @@ import java.util.stream.IntStream;
 
 public class TeamSortingFriendshipTester {
 
+    public static boolean useLPFirst = true;
+
     public static void main(String[] args) {
         int count;
         try {
@@ -26,24 +28,25 @@ public class TeamSortingFriendshipTester {
     }
 
     public static void runTest(int verb) {
-        int memberCount = 75;
-        int teamCount = 5;
-        int roleCount = 3;
-        int preferenceCount = 2;
+        int memberCount = 36; // 36, 36, 18, 80, 75
+        int teamCount = 4; // 4, 4, 3, 5, 5
+        int roleCount = 3; // 3, 3, 3, 4, 3
+        int preferenceCount = 3; // 3, 3, 3, 3, 2
         // Role requirements for each team
-        int roleReqLB = 2;
-        int roleReqUB = 5;
+        int roleReqLB = 1; // 1, 2, 1, 2, 2
+        int roleReqUB = 3; // 3, 3, 2, 4, 5
         // Minimum team sizes
-        int minTeamCountLB = 7;
-        int minTeamCountUB = 15;
+        int minTeamCountLB = 5; // 5, 7, 3, 7, 7
+        int minTeamCountUB = 9; // 9, 9, 5, 16, 15
         // Number of roles members have
-        int memberRoleCountLB = 1;
-        int memberRoleCountUB = 3;
+        int memberRoleCountLB = 1; // 1, 1, 1, 1, 1
+        int memberRoleCountUB = 3; // 3, 2, 2, 3, 3
         //if (memberCount < roleCount * roleReqUB * teamCount) memberCount = roleCount * roleReqUB * teamCount;
         //if (memberCount < minTeamCountUB * teamCount) memberCount = minTeamCountUB * teamCount;
-        int numbFriendships = 5 + ((int)(Math.random() * 11));
-        int friendshipSizeLB = 2;
-        int friendshipSizeUB = 4;
+        int numbFriendshipsRange = 6; // 6, 6, 5, 10, 11
+        int numbFriendships = 5 + ((int)(Math.random() * numbFriendshipsRange)); // 5, 5, 2, 5, 5
+        int friendshipSizeLB = 2; // 2, 2, 2, 2, 2
+        int friendshipSizeUB = 3; // 3, 3, 3, 4, 4
 
         TeamSortingInput input = TeamSortingGeneratorInput.generateInput(memberCount, teamCount, roleCount, preferenceCount,
                 roleReqLB, roleReqUB, minTeamCountLB, minTeamCountUB, memberRoleCountLB, memberRoleCountUB,
@@ -72,31 +75,37 @@ public class TeamSortingFriendshipTester {
         System.out.printf("%n----- Solving Team Sorting -----%n%n");
 
         TeamSorterSolver solver = new TeamSorterSolver(input, false);
-        /*solver.setUseHardPreferenceObjectiveFunction(false);
-        solver.setIgnoreFriendships(false);
-        solver.setRoundFriendships(true);*/
         TeamSortingLogger logger;
         TeamSorterResult result;
         TeamSorterResult roundedResult;
-        /*boolean caughtFailure = false;
+        boolean caughtFailure = false;
         String failureMessage = "";
-        try {
-            logger = new TeamSortingLogger(1);
+        if (useLPFirst) {
+            try {
+                solver.setUseHardPreferenceObjectiveFunction(false);
+                solver.setIgnoreFriendships(false);
+                solver.setRoundFriendships(true);
+                logger = new TeamSortingLogger(1);
+                result = solver.solve(logger);
+                roundedResult = result.getRoundedResult();
+            } catch (Exception e) {
+                caughtFailure = true;
+                failureMessage = e.getMessage();
+                solver.setUseHardPreferenceObjectiveFunction(false);
+                solver.setIgnoreFriendships(true);
+                solver.setRoundFriendships(true);
+                logger = new TeamSortingLogger(verb);
+                result = solver.solve(logger);
+                roundedResult = result.getRoundedResult();
+            }
+        } else {
+            solver.setUseHardPreferenceObjectiveFunction(false);
+            solver.setIgnoreFriendships(true);
+            solver.setRoundFriendships(true);
+            logger = new TeamSortingLogger(verb);
             result = solver.solve(logger);
             roundedResult = result.getRoundedResult();
-        } catch (Exception e) {
-
-            caughtFailure = true;
-            failureMessage = e.getMessage();
-            //e.printStackTrace();
-        }*/
-
-        solver.setUseHardPreferenceObjectiveFunction(false);
-        solver.setIgnoreFriendships(true);
-        solver.setRoundFriendships(true);
-        logger = new TeamSortingLogger(verb);
-        result = solver.solve(logger);
-        roundedResult = result.getRoundedResult();
+        }
 
         boolean usingRounded = roundedResult != null;
 
@@ -117,10 +126,10 @@ public class TeamSortingFriendshipTester {
             logger.log(String.format("Maximum value        (friendship objective): %.3f", (result.getTheoreticalMaxFriendshipObjectiveValue())));
             logger.log(String.format("Maximum value          (standard objective): %.3f", (result.getTheoreticalMaxObjectiveValue())));
         }
-        /*if (caughtFailure) {
+        if (caughtFailure) {
             System.out.println("--------- Original attempt failed, retried with rounding algorithm on LP without friendship constraints");
             System.out.printf("Failure Message: %s%n", failureMessage);
-        }*/
+        }
 
         CsvResultWriter.subdirectoryName = "genexperiment";
         CsvResultWriter.writeResultToFile(result, "genexperiment");
