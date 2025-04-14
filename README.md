@@ -28,8 +28,7 @@ repository):
 ``java -jar ./app/TeamSorting.jar <csv_file_path>``
 
 ### CSV Formatting
-The `app/example_format.csv` contains a template for formatting the csv. The 
-key parts of the template go down to rows 34. Below row 34, you can modify 
+The `app/example_format.csv` contains a template for formatting the csv. Below the indicated lines in the template, you can modify 
 the csv without changing the result of the program. Below those lines, I 
 have left some instructions on modifying the csv.
 
@@ -57,6 +56,8 @@ The numbers used in the command are the following arguments, in order:
 - Lower bound for number of roles each member can fulfill
 - Upper bound for number of roles each member can fulfill
 
-## Modifying the Code
-
+## In-Depth Experiments
+If you want to edit the files and run more in-depth experiments, you can open this folder in IntelliJ and use the build files provided. 
+One of these build files, "TeamSortingFriendshipTester", runs the experiment as done for the paper. By opening the TeamSortingFriendshipTester.java file, you can modify the
+values used for that experiment.
 
