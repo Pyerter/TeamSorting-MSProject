@@ -1,6 +1,6 @@
 # Summary
-This is the official repository made to accompany the paper "Team 
-Partitioning Approximation Algorithms".
+This is the official repository made to accompany the paper "The Team Partitioning Problem and Friendship
+Team Partitioning Variation".
 
 ## Dependencies
 The TPP program relies on Google's OR Tools. Here is the link to the 
