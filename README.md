@@ -1,6 +1,6 @@
 # Summary
-This is the official repository made to accompany the paper "Team 
-Partitioning Approximation Algorithms".
+This is the official repository made to accompany the paper "The Team Partitioning Problem and Friendship
+Team Partitioning Variation".
 
 ## Dependencies
 The TPP program relies on Google's OR Tools. Here is the link to the 
@@ -27,9 +27,11 @@ repository):
 
 ``java -jar ./app/TeamSorting.jar <csv_file_path>``
 
+There is also a corresponding `TeamSortingFriendship.jar` file and `.bat` and `.sh` files that can be run to solve the FTPP problem. The normal jar file does not account for and provide friendship solutions,
+but the `TeamSortingFriendship.jar` file will provide the solution by first using the FTPP LP and, if that doesn't work, provide the rounded solution based on the TPP LP solution.
+
 ### CSV Formatting
-The `app/example_format.csv` contains a template for formatting the csv. The 
-key parts of the template go down to rows 34. Below row 34, you can modify 
+The `app/example_format.csv` contains a template for formatting the csv. Below the indicated lines in the template, you can modify 
 the csv without changing the result of the program. Below those lines, I 
 have left some instructions on modifying the csv.
 
@@ -57,6 +59,8 @@ The numbers used in the command are the following arguments, in order:
 - Lower bound for number of roles each member can fulfill
 - Upper bound for number of roles each member can fulfill
 
-## Modifying the Code
-
+## In-Depth Experiments
+If you want to edit the files and run more in-depth experiments, you can open this folder in IntelliJ and use the build files provided. 
+One of these build files, "TeamSortingFriendshipTester", runs the experiment as done for the paper. By opening the TeamSortingFriendshipTester.java file, you can modify the
+values used for that experiment.
 
