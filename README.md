@@ -27,6 +27,9 @@ repository):
 
 ``java -jar ./app/TeamSorting.jar <csv_file_path>``
 
+There is also a corresponding `TeamSortingFriendship.jar` file and `.bat` and `.sh` files that can be run to solve the FTPP problem. The normal jar file does not account for and provide friendship solutions,
+but the `TeamSortingFriendship.jar` file will provide the solution by first using the FTPP LP and, if that doesn't work, provide the rounded solution based on the TPP LP solution.
+
 ### CSV Formatting
 The `app/example_format.csv` contains a template for formatting the csv. Below the indicated lines in the template, you can modify 
 the csv without changing the result of the program. Below those lines, I 
